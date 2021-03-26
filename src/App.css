@@ -46,3 +46,9 @@
   display: flex;
   margin-top: 2vh;
 }
+
+.warning {
+  color: red;
+  width: 300px;
+  background: white;
+}
