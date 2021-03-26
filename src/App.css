@@ -52,3 +52,12 @@
   width: 300px;
   background: white;
 }
+
+.final-button {
+  margin-top: 5vh;
+}
+
+.list {
+  display: flex;
+  margin-top: -4vh;
+}
