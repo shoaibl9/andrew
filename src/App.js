@@ -5,21 +5,20 @@ import { useForm } from 'react-hook-form';
 
 function App() {
 
-  const [names, setNames] = useState(["Shoaib Laghari"]);
+  const [names, setNames] = useState([{/*Add your name here as String*/}]); //this is to include ...
   function changeNames(name) {
     setNames(prevNames => [...prevNames, (name)]);
   }
 
-  const [emails, setEmails] = useState(["shoaiblaghari9@gmail.com"]);
+  const [emails, setEmails] = useState([{/*Add your email here as String*/}]); //... you in all mass outreach
   function changeEmails(email) {
     setEmails(prevEmails => [...prevEmails, (email)]);
   }
 
   const [contacts, setState] = useState([{
-    to_name: "Shoaib Laghari",
-    to_email: "shoaiblaghari9@gmail.com"
+    to_name: {/*Add your name here as String*/},
+    to_email: {/*Add your email here as String*/}
   }]);
-
   function changeContacts(name, email) {
     setState(prevContacts => [...prevContacts, {to_name: (name), to_email: (email)}]);
   }
@@ -29,6 +28,8 @@ function App() {
   const onSubmit = (data, event) => {
     changeNames(data.name);
     changeEmails(data.email);
+    console.log(data.name + " " + data.email);
+    console.log(names.length);
     event.target.reset();
   }
 
@@ -36,33 +37,36 @@ function App() {
     event.preventDefault();
     console.log("submit worked");
 
-    // emailjs.sendForm('uw_service', 'outreach_template', event.target, 'user_yHq4xCy835BmSn8BseCcV')
-    //   .then((result) => {
-    //       console.log(result.text);
-    //   }, (error) => {
-    //       console.log(error.text);
-    //   });
+    emailjs.sendForm({/*Add emailJS service here as String*/}, {/*Add emailJS template here as String*/}, event.target, {/*Add emailJS user id here as String*/})
+      .then((result) => {
+          console.log(result.text);
+      }, (error) => {
+          console.log(error.text);
+      });
 
       event.target.reset();
   }
 
-  function handleButton(event) {
+  function handleButtonOne(event) {
     event.preventDefault();
     console.log("submit worked");
-
-    for (var i = 0; i < names.length; i++){
+    for (var i = 1; i < names.length; i++){
       changeContacts(names[i], emails[i]);
     }
     console.log("Contacts updated.");
+  }
 
-    // for (var j = 0; j < settings.length; j++){
-    //   emailjs.send('uw_service', 'outreach_template', settings[j], 'user_yHq4xCy835BmSn8BseCcV')
-    //     .then((result) => {
-    //         console.log(result.text);
-    //     }, (error) => {
-    //         console.log(error.text);
-    //     });
-    // }
+  function handleButtonTwo() {
+    console.log(contacts.length);
+
+    for (let i = 1; i < contacts.length; i++){
+      emailjs.send({/*Add emailJS service here as String*/}, {/*Add emailJS template here as String*/}, contacts[i], 'user_yHq4xCy835BmSn8BseCcV')
+        .then((result) => {
+            console.log(result.text);
+        }, (error) => {
+            console.log(error.text);
+        });
+    }
   }
 
   return (
@@ -93,7 +97,8 @@ function App() {
       <h6>Current List:</h6>
       <div className="list">{names.join()}</div>
 
-      <button onClick={handleButton} className="final-button">Click Here to Full Send</button>
+      <button onClick={handleButtonOne} className="final-button">Click Here to Update Contact List</button>
+      <button onClick={handleButtonTwo} className="final-button">Click Here to Full Send</button>
       <p className="warning">Do NOT touch this button unless you are Shoaib</p>
       </header>
     </div>
