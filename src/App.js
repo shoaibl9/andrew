@@ -5,19 +5,19 @@ import { useForm } from 'react-hook-form';
 
 function App() {
 
-  const [names, setNames] = useState(["Shoaib Laghari"]);
+  const [names, setNames] = useState([{/*Add your name here as String*/}]); //this is to include ...
   function changeNames(name) {
     setNames(prevNames => [...prevNames, (name)]);
   }
 
-  const [emails, setEmails] = useState(["shoaiblaghari9@gmail.com"]);
+  const [emails, setEmails] = useState([{/*Add your email here as String*/}]); //... you in all mass outreach
   function changeEmails(email) {
     setEmails(prevEmails => [...prevEmails, (email)]);
   }
 
   const [contacts, setState] = useState([{
-    to_name: "Shoaib Laghari",
-    to_email: "shoaiblaghari9@gmail.com"
+    to_name: {/*Add your name here as String*/},
+    to_email: {/*Add your email here as String*/}
   }]);
   function changeContacts(name, email) {
     setState(prevContacts => [...prevContacts, {to_name: (name), to_email: (email)}]);
@@ -37,7 +37,7 @@ function App() {
     event.preventDefault();
     console.log("submit worked");
 
-    emailjs.sendForm('uw_service', 'mpop_template', event.target, 'user_yHq4xCy835BmSn8BseCcV')
+    emailjs.sendForm({/*Add emailJS service here as String*/}, {/*Add emailJS template here as String*/}, event.target, {/*Add emailJS user id here as String*/})
       .then((result) => {
           console.log(result.text);
       }, (error) => {
@@ -60,7 +60,7 @@ function App() {
     console.log(contacts.length);
 
     for (let i = 1; i < contacts.length; i++){
-      emailjs.send('uw_service', 'outreach_template', contacts[i], 'user_yHq4xCy835BmSn8BseCcV')
+      emailjs.send({/*Add emailJS service here as String*/}, {/*Add emailJS template here as String*/}, contacts[i], 'user_yHq4xCy835BmSn8BseCcV')
         .then((result) => {
             console.log(result.text);
         }, (error) => {
