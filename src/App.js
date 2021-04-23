@@ -60,7 +60,7 @@ function App() {
     console.log(contacts.length);
 
     for (let i = 1; i < contacts.length; i++){
-      emailjs.send({/*Add emailJS service here as String*/}, {/*Add emailJS template here as String*/}, contacts[i], 'user_yHq4xCy835BmSn8BseCcV')
+      emailjs.send({/*Add emailJS service here as String*/}, {/*Add emailJS template here as String*/}, contacts[i], {/*Add emailJS user id here as String*/})
         .then((result) => {
             console.log(result.text);
         }, (error) => {
